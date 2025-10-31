@@ -1,30 +1,47 @@
+'''
+
+overveiw
+one player gusses the word and the other player gusses aleter
+and the gussed leter if present in the word  will be repleced on its postion in the word
+untill the hangman produced
+if the hangman is producded before all space are filled the game over and the player lose
+if  the space are all fill ed before all leters in the word replace
+thethe game over and the player lose
+'''
+
 import random
-list_numbers=['0','1','2','3','4','5','6','7','8','8']
-list_letters=['a', 'A', 'b', 'B', 'C', 'c', 'd', 'D', 'e', 'E', 'F', 'G', 'f', 'g', 'h', 'i', 'H', 'I', 'j', 'J', 'k', 'K', 'l', 'm', 'L', 'N', 'M', 'n', 'o', 'p', 'O', 'P', 'Q', 'R', 'q', 'r', 's', 'S', 'T', 't', 'u', 'U', 'V', 'v', 'w', 'W', 'x', 'X', 'y', 'z', 'Y', 'z']
-list_symbols=['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '{', '[', ']', '}', '?', '/', '|']
-print("Well  Come To  My PassWord Genarator!!")
-passletter=[]
+list_word=["apple","banana","mango",'cats',"monkey","tree","hangman"]
+gussed_word=random.choice(list_word)
+space=[]
+for i in gussed_word:
+    space.append('_')
+lives=6
 
-numberOfLetter=int(input("How many  letters do you want in your password?"))
+#print(gussed_word)
+game_over=False
+print("Welcome to Hangman game! Good lack")
+while not game_over:
+    print(space)
+    gussed_letter=input("Guss the letter!").lower()
+    if gussed_letter in gussed_word:
+      if gussed_letter in space:
+          print("Please gusee another leter")
+      else:
+         for i in range(len(gussed_word)):
+            if gussed_letter==gussed_word[i]:
+                space[i]=gussed_letter
 
-passletter=random.choices(list_letters,k=numberOfLetter)
-print()#printing empty line
+         if "_" not in space:
+            game_over=True
+            print(space)
+            print("You win!!")
+    else:
+        lives-=1
+        if lives==0:
+            game_over=True
+            print("You lose!!")
 
-numberofinteger=int(input("How many numbers do you want in your passswod?"))
-passnumber=[]
-for i in range(numberofinteger):
-    passnumber.append(str(random.randint(0,9)))#generating one random number each iteration
-print()
 
-numberOfSymbols=int(input("How many symbols do you want  in your password?"))
-passsymbols=random.choices(list_symbols,k=numberOfSymbols)
-
-totalcode=passletter+passsymbols+passnumber
-#shufeled password generator
-random.shuffle(totalcode)#shuffling the total code
-
-Password=''.join(totalcode)#joining the list(totalcode
-print(f"The password generated: {Password}")
 
 
 
